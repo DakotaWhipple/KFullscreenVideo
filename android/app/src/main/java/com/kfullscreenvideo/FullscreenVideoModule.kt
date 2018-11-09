@@ -6,17 +6,22 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 
-class FullscreenVideoManager(reactContext: ReactApplicationContext)
+class FullscreenVideoModule(reactContext: ReactApplicationContext)
     : ReactContextBaseJavaModule(reactContext) {
 
-    override fun getName(): String = "KFullscreenVideo"
+    override fun getName(): String = "KFullscreenVideoPlayer"
 
     @ReactMethod
     fun playFullscreenVideo(videoUrl: String) {
         val intent = Intent(reactApplicationContext, FullscreenVideoActivity::class.java)
         intent.putExtra(FullscreenVideoActivity.EXTRA_VIDEO_URL, videoUrl)
-//        intent.putExtra(FullscreenVideoActivity.EXTRA_VIDEO_START_TIME, videoStartTime)
         reactApplicationContext.startActivity(intent)
-        Log.d("FullscreenVid", "Got here")
+    }
+    @ReactMethod
+    fun playFullscreenVideoA() {
+        val intent = Intent(reactApplicationContext, FullscreenVideoActivity::class.java)
+        reactApplicationContext.startActivity(intent)
+        Log.d("FullscreenVideoModule", "Got here..")
+        Log.d("FullscreenVideoModule", "s:" + reactApplicationContext.currentActivity)
     }
 }

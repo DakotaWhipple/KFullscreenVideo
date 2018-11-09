@@ -9,7 +9,7 @@ import com.facebook.react.uimanager.ViewManager
 
 class FullscreenVideoPackage: ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule>
-            = listOf<NativeModule>(FullscreenVideoManager(reactContext))
+            = listOf<NativeModule>(FullscreenVideoModule(reactContext))
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>>
             = listOf()

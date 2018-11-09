@@ -7,6 +7,8 @@ import android.graphics.PixelFormat
 import android.net.Uri
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.WindowManager
 import android.widget.MediaController
 import android.widget.VideoView
@@ -16,7 +18,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule
 import kotlinx.android.synthetic.main.video_frame_layout.*
 
 
-class FullscreenVideoActivity: ReactActivity() {
+class FullscreenVideoActivity: AppCompatActivity() {
     companion object {
         const val EXTRA_VIDEO_URL = "VIDEO_URL"
         const val EXTRA_VIDEO_START_TIME = "VIDEO_CURRENT_TIME"
@@ -25,7 +27,8 @@ class FullscreenVideoActivity: ReactActivity() {
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         setContentView(R.layout.video_frame_layout)
-        val videoProperties = getVideoProperties(intent)
+        Log.d("FullscreenVideoActivity", "Got here..")
+        /*val videoProperties = getVideoProperties(intent)
 
         // Setup window
         fullscreenWindow()
@@ -51,19 +54,19 @@ class FullscreenVideoActivity: ReactActivity() {
             loadingDialog.dismiss()
             videoView.seekTo(videoProperties.playbackTime)
             videoView.resume()
-        }
+        }*/
     }
 
-    override fun onPause() {
+/*    override fun onPause() {
         super.onPause()
         if (isFinishing) {
             val params = Arguments.createMap()
-            params.putInt(EXTRA_VIDEO_START_TIME, videoView.currentPosition)
+//            params.putInt(EXTRA_VIDEO_START_TIME, videoView.currentPosition)
 
-            reactInstanceManager
+            /*reactInstanceManager
                     .currentReactContext!!
                     .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                    .emit("toggleFullscreen", params)
+                    .emit("toggleFullscreen", params)*/
         }
     }
 
@@ -82,5 +85,6 @@ class FullscreenVideoActivity: ReactActivity() {
                     "Buffering video...",
                     true,
                     true)
+                    */
 }
 

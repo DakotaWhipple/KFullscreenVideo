@@ -4,14 +4,22 @@
  *
  * @format
  * @flow
+      console.log("S: ", KFullscreenVideo)
  */
+/*<Video source={{uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"}}
+            ref={(ref) => {
+                this.player = ref
+            }}
+            onBuffer={this.onBuffer}
+            onEnd={this.videoError}
+            style={styles.backgroundVideo} />*/
 
 import React, {Component} from 'react'
 import {Platform, StyleSheet, Text, View, Button} from 'react-native'
-import Video from 'react-native-video'
+//import Video from 'react-native-video'
 import {NativeModules} from 'react-native'
 
-const KFullscreenVideo = NativeModules.KFullscreenVideo.playFullscreenVideo
+//const KFullscreenVideo = NativeModules.KFullscreenVideo.playFullscreenVideo
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -23,20 +31,12 @@ const instructions = Platform.select({
 type Props = {};
 export default class App extends Component<Props> {
   render() {
-      console.log("S: ", NativeModules)
     return (
       <View style={styles.container}>
-        <Video source={{uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"}}
-            ref={(ref) => {
-                this.player = ref
-            }}
-            onBuffer={this.onBuffer}
-            onEnd={this.videoError}
-            style={styles.backgroundVideo} />
-
+        
         <Button
-        title = "stuff"
-            onPress={() => KFullscreenVideo("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")}
+            title = "stuff"
+            onPress={() => NativeModules.KFullscreenVideoPlayer.playFullscreenVideoA()}
         />
     </View>
     );
