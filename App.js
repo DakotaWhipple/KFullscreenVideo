@@ -6,7 +6,7 @@
  * @flow
       console.log("S: ", KFullscreenVideo)
  */
-/*<Video source={{uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"}}
+/*<Video source={{uri: }}
             ref={(ref) => {
                 this.player = ref
             }}
@@ -36,7 +36,7 @@ export default class App extends Component<Props> {
         
         <Button
             title = "stuff"
-            onPress={() => NativeModules.KFullscreenVideoPlayer.playFullscreenVideoA()}
+            onPress={() => NativeModules.KFullscreenVideoPlayer.playFullscreenVideo("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")}
         />
     </View>
     );

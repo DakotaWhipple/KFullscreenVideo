@@ -22,16 +22,5 @@ class MainActivity : ReactActivity() {
         return "KVideoPlayer"
     }
 
-    override fun createReactActivityDelegate(): ReactActivityDelegate {
-        return MainActivityDelegate(this, mainComponentName!!)
-    }
 
-    inner class MainActivityDelegate(val activity: Activity, val mainComponentName: String)
-            : ReactActivityDelegate(activity, mainComponentName) {
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            Log.d("MainActivity", "Got here....")
-        }
-
-    }
 }
