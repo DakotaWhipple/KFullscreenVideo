@@ -1,21 +1,27 @@
 package com.kfullscreenvideo
 
 import android.app.Activity
+import android.content.ComponentName
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.PixelFormat
+import android.media.session.MediaSession
 import android.net.Uri
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.support.v4.media.session.MediaSessionCompat
+import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
 import android.view.View
 import android.view.ViewManager
 import android.view.WindowManager
+import android.widget.MediaController
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.bridge.Arguments
 import com.google.android.exoplayer2.ExoPlayerFactory
 import com.google.android.exoplayer2.source.ExtractorMediaSource
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
@@ -46,18 +52,31 @@ class FullscreenVideoActivity: ReactActivity() {
             fullscreenWindow()
             window.setFormat(PixelFormat.TRANSLUCENT)
 
-//            val trackSelector = DefaultTrackSelector()
-            val exoPlayer = ExoPlayerFactory.newSimpleInstance(this@FullscreenVideoActivity)
+            val trackSelector = DefaultTrackSelector()
+            val exoPlayer = ExoPlayerFactory.newSimpleInstance(this@FullscreenVideoActivity, trackSelector)
             ui.exoPlayerView.player = exoPlayer
 
+            val componentName = ComponentName(this@FullscreenVideoActivity, FullscreenVideoActivity::class.java)
+            val mediaSession = MediaSessionCompat(this@FullscreenVideoActivity,
+                    "FullscreenVideoActivityDebug",
+                    componentName,
+                    null)
+
+            // Set player actions
+            val playbackStateCompact = PlaybackStateCompat.Builder()
+                    .setActions(PlaybackStateCompat.ACTION_PLAY_PAUSE)
+                    .build()
+
+            mediaSession.setPlaybackState(playbackStateCompact)
+            mediaSession.isActive = true
+
+            // Prepare URI
             val dataSourceFactory = DefaultDataSourceFactory(this@FullscreenVideoActivity,
                     Util.getUserAgent(this@FullscreenVideoActivity, "KFullscreenVideo"))
             val videoSource = ExtractorMediaSource.Factory(dataSourceFactory)
                     .createMediaSource(videoProperties.uri)
             exoPlayer.prepare(videoSource)
-            // Init mediaController
-//            val mediaController = MediaController(this@FullscreenVideoActivity)
-//            mediaController.setAnchorView(videoView)
+
 
             // Setup VideoView
             /*videoView.setMediaController(mediaController)
