@@ -20,6 +20,7 @@ import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.bridge.Arguments
 import com.google.android.exoplayer2.ExoPlayerFactory
+import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.source.ExtractorMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.ui.PlayerView
@@ -77,6 +78,10 @@ class FullscreenVideoActivity: ReactActivity() {
                     .createMediaSource(videoProperties.uri)
             exoPlayer.prepare(videoSource)
 
+            exoPlayer.playWhenReady = true
+
+            exoPlayer.seekTo((videoProperties.playbackTime * 1000).toLong())
+
 
             // Setup VideoView
             /*videoView.setMediaController(mediaController)
@@ -123,8 +128,7 @@ class FullscreenVideoActivity: ReactActivity() {
     }
 
     override fun getMainComponentName(): String? {
-//        return "KFullscreenVideoPlayer"
-        return "KVideoPlayer"
+        return "KFullscreenVideo"
     }
 
     override fun createReactActivityDelegate(): ReactActivityDelegate {

@@ -11,7 +11,7 @@ import com.facebook.soloader.SoLoader
 
 import java.util.Arrays
 
-class MainApplication : Application(), ReactApplication {
+class MainApplication: Application(), ReactApplication {
 
     private val mReactNativeHost = object : ReactNativeHost(this) {
         override fun getUseDeveloperSupport(): Boolean {
@@ -21,7 +21,7 @@ class MainApplication : Application(), ReactApplication {
         override fun getPackages(): List<ReactPackage> {
             return Arrays.asList(
                     MainReactPackage(),
-                    //          new ReactVideoPackage(),
+//                  ReactVideoPackage(),
                     FullscreenVideoPackage()
             )
         }
